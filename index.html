@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>First animation of animejs</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</head>
+<style>
+    body {
+        background-color: antiquewhite;
+    }
+
+    img {
+        width: 40px;
+        height: 40px;
+    }
+
+
+
+    .float-parent-element {
+        width: 90%;
+    }
+
+    .float-child-element {
+        float: left;
+        width: 50%;
+    }
+
+    fieldset {
+        margin-bottom: 1rem;
+    }
+
+    .progress {
+        width: 82%;
+        margin-bottom: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    article {
+        width: 40px;
+        height: 40px;
+        margin-top: auto;
+        margin-bottom: auto;
+        mix-blend-mode: darken;
+    }
+
+    .red {
+        width: 10px;
+        height: 10px;
+        background-color: red;
+    }
+
+    .green {
+        width: 10px;
+        height: 10px;
+        background-color: green;
+    }
+
+    .blue {
+        width: 10px;
+        height: 10px;
+        background-color: blue;
+    }
+</style>
+
+<body>
+
+    <div class="float-parent-element">
+
+        <div class="float-child-element">
+            <br>
+            <img src="img\Me.png" alt="Avatar">
+
+        </div>
+        <div class="float-child-element">
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <div class="container">
+                <h4><b>Name : Mohamed Aqib.</b></h4>
+                <h4>Job Title : Web designer</h4>
+                <h4>Age : </h4><div class="age">21</div></h4>
+                <p>Hello there, my name is Mohamed Aqib Bin Mohamed Sani.
+                    I’m an enthusiastic, self-driven I.T <br>
+                    geek with a diverse talents and background. I excel best in fast-paced team environments where
+                    my facilitation and organizational skills allow collaboration, creative idea exchange, and
+                    efficient
+                    delegation to flourish into successful programs, projects, and instruction.</p>
+                
+
+            </div>
+        </div>
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <article>
+        <section>
+            <div class="red"></div>
+        </section>
+        <section>
+            <div class="green"></div>
+        </section>
+        <section>
+            <div class="blue"></div>
+        </section>
+    </article>
+    <input class="progress" type="range" value="0" min="0" max="100"></input>
+
+    <fieldset>
+        <button class="play">Play</button>
+        <button class="pause">Pause</button>
+        <button class="restart">Restart</button>
+    </fieldset>
+
+
+
+
+
+    <script>
+        anime({
+            targets: "img",
+            height: "50%",
+            width: "50%",
+            translateX: 270,
+            delay: anime.stagger(100) // increase delay by 100ms for each elements.
+
+        });
+
+
+        var playButton = document.querySelector('.play');
+        var pauseButton = document.querySelector('.pause');
+        var restartButton = document.querySelector('.restart');
+        var progress = document.querySelector('.progress');
+
+        var myAnimation = anime({
+            targets: 'section',
+            translateX: function () { return anime.random(0, 100) + 'rem'; },
+            scale: function () { return anime.random(10, 10) / 10; },
+            rotate: function () { return anime.random(-360, 360); },
+            duration: function () { return anime.random(800, 1400); },
+            loop: true,
+            direction: 'alternate',
+            autoplay: false,
+            easing: 'easeOutQuad',
+            update: function (animation) {
+                progress.value = animation.progress;
+            }
+        });
+
+        playButton.addEventListener('click', function () { myAnimation.play(); });
+        pauseButton.addEventListener('click', function () { myAnimation.pause(); });
+        restartButton.addEventListener('click', function () { myAnimation.restart(); });
+        progress.addEventListener('input', function () { myAnimation.seek(progress.value); });
+
+
+        anime({
+            targets: '.age',
+            innerHTML: [0, 21], //start and end values
+            easing: 'linear',
+            round: 1, //rounds off to zero decimal places
+            duration: 2000
+        });
+
+
+    </script>
+</body>
+
+</html>
